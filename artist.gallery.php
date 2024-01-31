@@ -1,23 +1,22 @@
 <?php 
 session_start();
-require 'otherFiles/db.inc.php';
 
+require 'otherFiles/db.inc.php';
 $sql = "SELECT * FROM artist";
 $query = mysqli_query($con, $sql);
+
+$images = "SELECT * FROM images";
+$Query = mysqli_query($con, $images);
+
 
 if(!isset($_SESSION['password']) && !isset($_SESSION['email'])){
     header('location: login.form.php');
 }
 
-if($_SESSION['role'] != 0){
-    header('location: home.php');
-}
 if(isset($_SESSION['role'])){
     $role = $_SESSION['role'];
 }
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,55 +45,55 @@ if(isset($_SESSION['role'])){
             </div>
         </nav>
 
-    <div class="d-flex" id="wrapper">
+<div class="d-flex" id="wrapper">
             <!-- Sidebar-->
             <div class="border-end bg-white col-2" id="sidebar-wrapper">
                 <div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3 <?php echo($role == 0 ? 'd-block' : 'd-none') ?> " href="dashboard.php">Dashboard</a>   <a class="list-group-item list-group-item-action list-group-item-light p-3 <?php echo($role == 1 ? 'd-block' : 'd-none') ?>" href="profile.php">Profile</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3 <?php echo($role == 1 ? 'd-block' : 'd-none') ?>" href="gallery.php?id=<?php echo $_SESSION['ID'] ?>">Gallery</a>  <a class="list-group-item list-group-item-action list-group-item-light p-3 <?php echo($role == 0 ? 'd-block' : 'd-none') ?> " href="artist.gallery.php">Artist Gallery</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3 active <?php echo($role == 0 ? 'd-block' : 'd-none') ?>" href="users.php">Users</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 <?php echo($role == 1 ? 'd-block' : 'd-none') ?>" href="gallery.php?id=<?php echo $_SESSION['ID'] ?>">Gallery</a>  <a class="list-group-item list-group-item-action list-group-item-light p-3 active <?php echo($role == 0 ? 'd-block' : 'd-none') ?> " href="artist.gallery.php">Artist Gallery</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 <?php echo($role == 0 ? 'd-block' : 'd-none') ?>" href="users.php">Users</a>
                 </div>
             </div>
             <div class="container-fluid mx-3">
                     <div class="container mt-3">
-                        <a href="add.user.php" class="btn btn-primary">New User</a>
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Action</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Title</th>
                                     <th scope="col">Last Name</th>
                                     <th scope="col">First Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Role</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                             <?php
-                                if($query->num_rows > 0){
-                                while($row = $query->fetch_assoc()){
+                                if($Query->num_rows > 0){
+                                    while($art = $Query->fetch_assoc()){
+                                    $artistId = $art['artistId'];
+                                    $artistSql = "SELECT firstname, lastname from artist where id='$artistId'";
+                                    $artist = $con->query($artistSql);
+                                    $artistName = $artist->fetch_assoc();
                             ?> 
                                 <tr>
-                                    <td><a class="btn btn-primary" href="users.edit.php?id=<?php echo $row['id'] ?>">Edit</a>  <a class="btn btn-danger" href="otherFiles/user.delete.php?id=<?php echo $row['id'] ?>">Delete</a></td>
-                                    <td><?php echo $row['lastname'] ?></td>
-                                    <td><?php echo $row['firstname'] ?></td>
-                                    <td><?php echo $row['email'] ?></td>
-                                    <td><span class="badge <?php echo($row['role'] == 0 ? "bg-danger" : "bg-success") ?>"><?php echo($row['role'] == 0 ? "Admin" : "User") ?></span></td>
+                                    <td width="10%"><img src="uploads/<?php echo $art['image'] ?>" alt="" width="100%"></td>
+                                    <td><?php echo $art['title'] ?></td>
+                                    <td><?php echo $artistName['firstname'] ?></td>
+                                    <td><?php echo $artistName['lastname'] ?></td>
+                                    <td><a class="btn btn-danger" href="otherFiles/delete.img.php?id=<?php echo $art['id'] ?>">Delete</a></td>
                                 </tr>
                             <?php
                                     }
                                 }
                             ?>
+                                
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-                                
-     
-
+</div>
 
 
 

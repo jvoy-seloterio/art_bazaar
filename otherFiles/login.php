@@ -21,8 +21,6 @@ if (isset($_POST['email']) && isset($_POST['password'])){
 
         if(mysqli_num_rows($query) === 1){
             $row = mysqli_fetch_assoc($query);
-            var_dump($row);
-            die();
 
             if($row['email'] == $email && $row['password'] == $password){
                 $_SESSION['email'] = $row['email'];

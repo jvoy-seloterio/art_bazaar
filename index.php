@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+require 'otherFiles/db.inc.php';
+
 if(isset($_SESSION['password']) && isset($_SESSION['email'])){
     header('location: home.php');
 }
@@ -18,9 +21,10 @@ if(isset($_SESSION['password']) && isset($_SESSION['email'])){
     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <img src="uploads/Logo.png" width="120" height="60">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="index.php">Home</a>
+                        <a class="nav-link text-white ms-3" href="index.php">Home</a>
                     </li>
                 </ul>
             </div>
@@ -33,6 +37,15 @@ if(isset($_SESSION['password']) && isset($_SESSION['email'])){
         </div>
     </nav>
 
+    <div class="ms-5">
+        <?php
+            $upload = "SELECT * from images";
+            $files = mysqli_query($con, $upload);
+            while($row = mysqli_fetch_assoc($files)){
+            ?>
+            <img class="rounded-4 ms-3 mt-5" src="uploads/<?php echo $row['image'] ?>" width="auto" height="400">
+            <?php } ?>
+    </div>
 
     
 

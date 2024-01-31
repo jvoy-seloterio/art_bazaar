@@ -1,6 +1,14 @@
 <?php 
 session_start();
 
+require 'otherFiles/db.inc.php';
+$sql = "SELECT * FROM artist";
+$query = mysqli_query($con, $sql);
+
+$images = "SELECT * FROM images";
+$Query = mysqli_query($con, $images);
+
+
 if(!isset($_SESSION['password']) && !isset($_SESSION['email'])){
     header('location: login.form.php');
 }
@@ -23,13 +31,14 @@ if(isset($_SESSION['role'])){
     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <img src="uploads/Logo.png" width="120" height="60">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="home.php">Home</a>
+                            <a class="nav-link text-white ms-3" href="home.php">Home</a>
                         </li>
                     </ul>
                 </div>
-                <a href="dashboard.php" class="text-decoration-none text-white mx-4"><?php echo $_SESSION['firstname']; ?></a>
+                <a href="dashboard.php" class="text-decoration-none text-white mx-4"><?php echo($role == 0 ? 'Dashboard' : $_SESSION['firstname']); ?></a>
                 <div>
                     <a href="otherFiles/logout.php" class="btn btn-primary">Logout</a>
                 </div>
@@ -40,9 +49,9 @@ if(isset($_SESSION['role'])){
             <!-- Sidebar-->
             <div class="border-end bg-white col-2" id="sidebar-wrapper">
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3 active" href="dashboard.php">Dashboard</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="gallery.php">Gallery</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3 <?php echo($role == 0 ? 'd-lock' : 'd-none') ?>" href="users.php">Users</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 active <?php echo($role == 0 ? 'd-block' : 'd-none') ?> " href="dashboard.php">Dashboard</a>   <a class="list-group-item list-group-item-action list-group-item-light p-3 active <?php echo($role == 1 ? 'd-block' : 'd-none') ?>" href="profile.php">Profile</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 <?php echo($role == 1 ? 'd-block' : 'd-none') ?>" href="gallery.php?id=<?php echo $_SESSION['ID'] ?>">Gallery</a>  <a class="list-group-item list-group-item-action list-group-item-light p-3 <?php echo($role == 0 ? 'd-block' : 'd-none') ?> " href="artist.gallery.php">Artist Gallery</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 <?php echo($role == 0 ? 'd-block' : 'd-none') ?>" href="users.php">Users</a>
                 </div>
             </div>
 </div>

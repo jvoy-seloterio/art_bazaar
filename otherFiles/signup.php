@@ -11,7 +11,7 @@ $role = "1";
 
 
 
-$sql = "INSERT INTO artist (ID, role, firstname, lastname, address, email, password) VALUES (NULL , $role, '$fName', '$sName', '$address', '$email', '$password')";
+$sql = "INSERT INTO artist (id, role, firstname, lastname, address, email, password) VALUES (NULL , $role, '$fName', '$sName', '$address', '$email', '$password')";
 
 
 if ($con->query($sql) === TRUE) {
