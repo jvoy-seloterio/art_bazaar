@@ -57,12 +57,13 @@ if (isset($_SESSION['ID'])){
                     <?php
                         $upload = "SELECT * from profile";
                         $files = mysqli_query($con, $upload);
-                        $row = mysqli_fetch_assoc($files);
-                        $profile = $row['profile'];
-                        $artistID = $row['artistId'];
-                        $about = $row['statement'];
-                        $_SESSION['imgID'] = $row['id'];
-                    
+                        if(mysqli_num_rows($files) === 1){
+                            $row = mysqli_fetch_assoc($files);
+                            $profile = $row['profile'];
+                            $artistID = $row['artistId'];
+                            $about = $row['statement'];
+                            $_SESSION['imgID'] = $row['id'];
+                        }
                     ?>
                         <img src="<?php echo($id == $artistID ? "uploads/$profile" : "uploads/profile.jpg") ?>" width="300px" height="300px">
                     </div>
