@@ -18,8 +18,8 @@ require 'db.inc.php';
     $ID = $id;
 
 
-    if(empty($file)){
-        header("location: ../profile.form.php?error=no-image");
+    if(empty($type)){
+        header("location: ../profile.php");
     }
     elseif($_FILES["profile"]["size"] > 500000) {
         header("location: ../profile.form.php?error=too-large");
@@ -34,7 +34,8 @@ require 'db.inc.php';
         $query = mysqli_query($con, $sql);
 
         if(move_uploaded_file($temp, $uploads)){
-            header("location: ../profile.php?id=$ID status=sucess");
+            header("location: ../profile.php?id=$id status=sucess");
+            exit();
         }else{
             header("location: ../profile.php?error=failed");
         }

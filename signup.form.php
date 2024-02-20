@@ -4,6 +4,9 @@ session_start();
 if(isset($_SESSION['password']) && isset($_SESSION['email'])){
     header('location: home.php');
 }
+if(isset($_GET['error'])){
+    $error = $_GET['error'];
+}
 
 ?>
 
@@ -24,6 +27,7 @@ if(isset($_SESSION['password']) && isset($_SESSION['email'])){
                     <h2>Sign Up Form</h2>
                 </div>
 
+            
             <form action="otherFiles/signup.php" method="post" class="row g-3 mt-3 me-5">
                 <div class="col-10">
                     <input type="text" class="form-control" name="fname" placeholder="Firstname">
@@ -36,6 +40,7 @@ if(isset($_SESSION['password']) && isset($_SESSION['email'])){
                 </div>
                 <div class="col-10">
                     <input type="email" class="form-control" name="email" placeholder="Email">
+                    <small class="ms-2 text-danger <?php echo($error == "email is already in use." ? 'd-block' : 'd-none') ?>">Email already in use.</small>
                 </div>
                 <div class="col-10">
                     <input type="password" class="form-control" name="password" placeholder="Password">

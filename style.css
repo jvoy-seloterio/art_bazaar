@@ -16,3 +16,8 @@
     height: 100vh;
     width: 550px;
 }
+.art{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}

@@ -7,7 +7,9 @@ if(isset($_SESSION['password']) && isset($_SESSION['email'])){
     if(isset($_SESSION['role'])){
         $role = $_SESSION['role'];
     }
-    
+    if(isset($_SESSION['ID'])){
+        $id = $_SESSION['ID'];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +32,7 @@ if(isset($_SESSION['password']) && isset($_SESSION['email'])){
                     </li>
                 </ul>
             </div>
-            <a class="text-light text-decoration-none mx-4 <?php echo($role == 0 ? 'd-block' : 'd-none') ?> " href="dashboard.php">Dashboard</a>   <a class="text-light text-decoration-none mx-4 <?php echo($role == 1 ? 'd-block' : 'd-none') ?>" href="profile.php">Profile</a>
+            <a class="text-light text-decoration-none mx-4 <?php echo($role == 0 ? 'd-block' : 'd-none') ?> " href="dashboard.php">Dashboard</a>   <a class="text-light text-decoration-none mx-4 <?php echo($role == 1 ? 'd-block' : 'd-none') ?>" href="profile.php?id=<?php echo($id) ?>">Profile</a>
             <div>
                 <a href="otherFiles/logout.php" class="btn btn-primary">Logout</a>
             </div>

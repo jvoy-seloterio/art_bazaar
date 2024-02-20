@@ -37,7 +37,7 @@ if(isset($_SESSION['password']) && isset($_SESSION['email'])){
         </div>
     </nav>
 
-    <div class="ms-5">
+    <div class="">
         <?php
             $upload = "SELECT * from images";
             $files = mysqli_query($con, $upload);

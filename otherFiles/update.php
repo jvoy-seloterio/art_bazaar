@@ -16,6 +16,7 @@ if(move_uploaded_file($temp, $uploads)){
     
     if($query === TRUE){
         header("location: ../profile.php?id=$id");
+        exit();
     }
 }
 
