@@ -1,0 +1,73 @@
+    nav .navs .nav{
+        display: flex;
+        gap: 15px;
+    }
+    .cont{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        position: relative;
+    }
+    .cont img{
+        border-radius: 50%;
+    }
+    .cont a{
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        position: absolute;
+        bottom: 0px;
+        right: 10px;
+    }
+    .cons{
+        display: contents;
+    }
+    .art{
+        display: flex;
+        flex-direction: column;
+        width: auto;
+    }
+    .head{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .head .name{
+        display: flex;
+        gap: 5px;
+    }
+    .aboutCon .about{
+        display: flex;
+        border-left: 2px solid rgb(0, 0, 0);
+        padding: 5px;
+        position: relative;
+    }
+    .aboutCon .about .svgs{
+        position: absolute;
+        right: 0;
+        top: -15px;
+    }
+    .aboutCon .about svg{
+        bottom: 50px;
+        color: rgb(255, 56, 56);
+    }
+
+    .border1{
+        display: flex;
+        margin-top: 40px;
+        margin-left: 300px;
+        width: 1000px;
+        border-bottom: 1px solid rgb(97, 97, 97);
+    }
+    .uploads{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 30px 0 0 200px;
+        width: 80%;
+    }
+    .output{
+        display: flex;
+        gap: 10px;
+    }

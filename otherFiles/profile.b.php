@@ -18,10 +18,7 @@ require 'db.inc.php';
     $ID = $id;
 
 
-    if(empty($type)){
-        header("location: ../profile.php");
-    }
-    elseif($_FILES["profile"]["size"] > 500000) {
+    if($_FILES["profile"]["size"] > 500000) {
         header("location: ../profile.form.php?error=too-large");
     }
     elseif($type != "jpg" && $type != "png" && $type != "jpeg"
